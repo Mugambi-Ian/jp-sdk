@@ -2,6 +2,9 @@ import { JustPaidOptions, JustPaidClient } from './types';
 import { CustomersResource } from './resources/customers';
 import { InvoicesResource } from './resources/invoices';
 import { UsageResource } from './resources/usage';
+import { ContractsResource } from './resources/contracts';
+import { TemplatesResource } from './resources/templates';
+import { BillableMetricsResource } from './resources/metrics';
 
 export class JustPaid implements JustPaidClient {
     private apiToken: string;
@@ -10,6 +13,9 @@ export class JustPaid implements JustPaidClient {
     public customers: CustomersResource;
     public invoices: InvoicesResource;
     public usage: UsageResource;
+    public contracts: ContractsResource;
+    public templates: TemplatesResource;
+    public billableMetrics: BillableMetricsResource;
 
     constructor(options: JustPaidOptions) {
         if (!options.apiToken) {
@@ -21,6 +27,9 @@ export class JustPaid implements JustPaidClient {
         this.customers = new CustomersResource(this);
         this.invoices = new InvoicesResource(this);
         this.usage = new UsageResource(this);
+        this.contracts = new ContractsResource(this);
+        this.templates = new TemplatesResource(this);
+        this.billableMetrics = new BillableMetricsResource(this);
     }
 
     public async request<T>(

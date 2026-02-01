@@ -1,5 +1,5 @@
 import { JustPaidClient } from '../types';
-import { Invoice, CreateInvoiceParams } from '../types';
+import { Invoice, CreateInvoiceParams, UpdateInvoiceParams, InvoiceLineItem, CreateLineItemParams } from '../types';
 
 export class InvoicesResource {
     private client: JustPaidClient;
@@ -18,5 +18,13 @@ export class InvoicesResource {
 
     public async list(): Promise<Invoice[]> {
         return this.client.request<Invoice[]>('/invoice/', 'GET');
+    }
+
+    public async update(invoiceId: string, params: UpdateInvoiceParams): Promise<Invoice> {
+        return this.client.request<Invoice>(`/invoice/${invoiceId}`, 'PUT', params);
+    }
+
+    public async createLineItem(invoiceId: string, params: CreateLineItemParams): Promise<InvoiceLineItem> {
+        return this.client.request<InvoiceLineItem>(`/invoice/${invoiceId}/line-items`, 'POST', params);
     }
 }

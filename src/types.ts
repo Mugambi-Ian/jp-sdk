@@ -76,6 +76,78 @@ export interface CreateInvoiceParams {
     }[];
 }
 
+export interface UpdateInvoiceParams {
+    invoice_status?: 'draft' | 'open' | 'paid' | 'uncollectible' | 'void' | 'sent';
+    invoice_date?: string;
+    due_date?: string;
+    description?: string;
+    service_start_date?: string;
+    service_end_date?: string;
+    notes?: string;
+    recipients?: string[];
+    custom_fields?: any[];
+}
+
+export interface CreateLineItemParams {
+    name: string;
+    unit_price: number;
+    description: string;
+    quantity?: number;
+    flat_fee?: number;
+    discount_amount?: number;
+    discount_percent?: number;
+    tax_rate?: number;
+    tax_name?: string;
+    service_start_date?: string;
+    service_end_date?: string;
+    display_order?: number;
+}
+
+export interface Contract {
+    uuid: string;
+    title: string;
+    contract_status: string;
+    contract_start_date: string;
+    contract_end_date: string;
+    contract_amount: number;
+    currency: string;
+    payment_terms: string;
+    is_evergreen: boolean;
+    customer: {
+        uuid: string;
+        name: string;
+        email: string;
+    };
+    created_at: string;
+    [key: string]: any;
+}
+
+export interface Template {
+    uuid: string;
+    name: string;
+    description: string;
+    is_active: boolean;
+    created_at: string;
+    updated_at: string;
+    [key: string]: any;
+}
+
+export interface BillableMetric {
+    uuid: string;
+    name: string;
+    description: string;
+    event_name: string;
+    aggregation_type: number;
+    created_at: string;
+}
+
+export interface CreateBillableMetricParams {
+    name: string;
+    description: string;
+    event_name: string;
+    aggregation_type: number;
+}
+
 export interface UsageEvent {
     customer_id: string;
     meter_id: string;
