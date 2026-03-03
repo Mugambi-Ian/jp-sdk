@@ -11,4 +11,8 @@ export class ContractsResource {
     public async get(contractId: string): Promise<Contract> {
         return this.client.request<Contract>(`/contract/${contractId}`, 'GET');
     }
+
+    public async list(): Promise<any> {
+        return this.client.request<any>('/contract/', 'GET');
+    }
 }

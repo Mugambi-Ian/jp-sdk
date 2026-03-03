@@ -16,6 +16,10 @@ export class CustomersResource {
         return this.client.request<Customer>(`/customer/${customerId}`, 'GET');
     }
 
+    public async list(): Promise<any> {
+        return this.client.request<any>('/customer/', 'GET');
+    }
+
     public async update(customerId: string, params: UpdateCustomerParams): Promise<Customer> {
         return this.client.request<Customer>(`/customer/update`, 'PATCH', {
             ...params,
